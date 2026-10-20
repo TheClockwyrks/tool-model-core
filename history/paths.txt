@@ -1,0 +1,5 @@
+crates/model-core/
+crates/model-skin/
+crates/voxel-mesh/
+crates/voxel/src/color.rs
+crates/voxel/src/rig.rs

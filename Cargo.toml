@@ -1,0 +1,61 @@
+# The workspace of the tool-model-core repository. Every crate under crates/ is a
+# member; add a crate by adding its directory.
+[workspace]
+# The resolver of edition 2024, the monorepo's, so a crate resolves the same
+# features and the same MSRV-aware versions on both sides of an extraction.
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+edition = "2024"
+version = "0.0.0"
+license = "MIT"
+repository = "https://github.com/TheClockwyrks/tool-model-core"
+# A crate of The Test Cabinet is consumed by its git source, never from
+# crates.io, so none is published; a member says `publish.workspace = true`, and
+# Cargo refuses that key when the root holds none to inherit.
+publish = false
+
+# Warnings-as-errors, baked into the manifests for every member crate that
+# opts in with `[lints] workspace = true`, so a plain `cargo build` enforces
+# the policy the clippy gate enforces on the command line.
+[workspace.lints.rust]
+warnings = "deny"
+
+[workspace.lints.clippy]
+all = "deny"
+
+# The crates of the other repositories this one may depend on, each at its
+# public source, the GitHub mirror, and the tag its dependents pin. The
+# superrepo's .cargo/config.toml redirects every one of these to the sibling
+# checkout, so a build inside the superrepo never fetches them. A manifest
+# never names an Azure URL or a path outside the repository: the
+# dependency-edges gate refuses both.
+[workspace.dependencies]
+test-cabinet-contracts = { git = "https://github.com/TheClockwyrks/contracts", tag = "v0.2.2" }
+# The crate test-cabinet-model-core's tests hold its colour parser to: the
+# manifest check a case's preview `background` is refused by.
+test-cabinet-suites = { git = "https://github.com/TheClockwyrks/contracts", tag = "v0.2.2" }
+
+# The third-party crates the members share, at the requirements the monorepo
+# held them to when the crates were extracted from it.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+clap = { version = "4", features = ["derive"] }
+# PNG encoding for the shared mesh preview renderer. The `png` crate is a
+# small, pure-Rust encoder with no system dependencies.
+png = "0.17"
+# The headless mesh preview renderer (`test-cabinet-model-core`'s `render`
+# module, behind its `cli` feature). `wgpu` targets Mesa lavapipe (software
+# Vulkan) to draw offscreen with no GPU or window; `glam` builds the camera
+# matrices; `bytemuck` casts vertex/uniform structs to GPU bytes; `pollster`
+# blocks on wgpu's async device/queue calls. A library consumer links the crates
+# here without their `cli` feature and never compiles these. On Linux the native
+# Vulkan (Mesa lavapipe) and GLES backends are compiled in by wgpu-hal's target
+# defaults — they are not cargo features — so the default feature set (which
+# includes `wgsl` for the shader) is what the renderer needs.
+wgpu = "24"
+glam = "0.29"
+bytemuck = { version = "1", features = ["derive"] }
+pollster = "0.4"

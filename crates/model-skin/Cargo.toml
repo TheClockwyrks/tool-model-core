@@ -1,8 +1,10 @@
 [package]
 name = "test-cabinet-model-skin"
+description = "The skinning library behind the skinned-character binaries: the skeleton, bone-heat weights, linear-blend deform and the skinned glb."
 edition.workspace = true
 version.workspace = true
 license.workspace = true
+repository.workspace = true
 publish.workspace = true
 
 # The shared skinning library behind the skinned-character binaries (`mc-skin`,
@@ -15,7 +17,7 @@ publish.workspace = true
 # shared wgpu+Mesa renderer from `test-cabinet-model-core` — and adds only the skinning
 # layer on top. The three binaries each pin one `Algorithm`; the CLI surface lives here
 # so they stay thin. See
-# `apps/docs/src/content/docs/testing/asset-generation/skinned-binaries.md`.
+# https://docs.testcabinet.ai/testing/asset-generation/skinned-binaries/.
 [lib]
 name = "test_cabinet_model_skin"
 path = "src/lib.rs"

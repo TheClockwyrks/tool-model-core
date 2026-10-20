@@ -1,8 +1,10 @@
 [package]
 name = "test-cabinet-voxel-mesh"
+description = "The signed-distance meshing domain: the field, the CSG field operations, the marching cubes, surface nets and dual contouring meshers, the QEM simplify and the glb emission."
 edition.workspace = true
 version.workspace = true
 license.workspace = true
+repository.workspace = true
 publish.workspace = true
 
 # The signed-distance meshing domain shared by the surface-extraction tools
@@ -30,7 +32,7 @@ path = "src/lib.rs"
 # `cli` pulls in `serde_json` (for the per-part `.glb` JSON chunk) and enables
 # `test-cabinet-model-core`'s `cli` feature (the `render::MeshView` a `Mesh` borrows
 # into for the preview renderer). It is on by default for the binaries; a library
-# consumer such as `crates/driver` links this crate with `default-features = false` to
+# consumer such as the driver links this crate with `default-features = false` to
 # get only the pure domain types (field, ops, mesher trait + stub) without the
 # renderer stack.
 default = ["cli"]

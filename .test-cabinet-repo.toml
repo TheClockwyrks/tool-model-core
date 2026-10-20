@@ -1,0 +1,7 @@
+# The kit this repository was rendered from, written by the superrepo's
+# scripts/repos/render.py from the answers in .copier-answers.yml. `name`
+# decides the dependency edges the dependency-edges gate permits, and `kind`
+# the shape the kit gave the repository.
+name = "tool-model-core"
+kind = "tool"
+description = "The model core every model tool builds on: the rig, animation and record model with the shared mesh preview renderer, the signed-distance meshing domain and the skinning library."
