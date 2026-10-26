@@ -2,7 +2,7 @@
 # kit was last rendered or updated from. Copier maintains it through the
 # superrepo's scripts/repos/render.py; a change made here is overwritten by
 # the next update.
-_commit: v0.6.3-5235-g6f60dbd3d
+_commit: v0.6.3-5579-g9ecc82fe9
 _src_path: ..
 description: 'The model core every model tool builds on: the rig, animation and record
     model with the shared mesh preview renderer, the signed-distance meshing domain
